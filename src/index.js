@@ -1,8 +1,10 @@
-import {General, Database, DateTime, Date, Time, Timeslot} from "./util";
+import {General, Database, DateTime, Timeslot} from "./util";
 
 function init(){
     Database.getAllTimeSlots(displayTimeslots);
-    //Database.insertTimeslot(new Timeslot("Inserted timeslot", 0, ))
+    Database.insertTimeslot(new Timeslot("Inserted timeslot", 0, 
+        new DateTime(12, 25, 2021, 7, 30, "PM"), 
+        new DateTime(12, 26, 2021, 12, 0, "AM")));
 }
 
 
@@ -13,15 +15,14 @@ function displayTimeslots(timeslots){
         let current = timeslots[i];
 
         let title = current.title;
-        let id = current.id;
         let repeated = current.repeated;
-        let start = new DateTime(current.start);
-        let end = new DateTime(current.end);
+        let start = DateTime.create(current.start);
+        let end = DateTime.create(current.end);
         
 
         let titleLine = General.textElement("h5", title);
         let str = "no";
-        if(repeated == 1){
+        if(repeated === 1){
             str = "yes";
         }
         let secondLine = General.textElement("p", "Repeated: " + str);

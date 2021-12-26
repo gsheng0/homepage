@@ -26,6 +26,7 @@ export class Database {
 
     static insertTimeslot(timeslot){
         let data = JSON.stringify(timeslot);
+        console.log(data);
         Database.request("add/timeslot", "POST", data);
     }
 }
@@ -94,9 +95,14 @@ export class General{
 }
 
 export class DateTime{
-    constructor(timeObj){
-        this.time = new Time(timeObj.time);
-        this.date = new Date(timeObj.date);
+    constructor(month, day, year, hour, minute, period){
+        this.date = new Date(month, day, year);
+        this.time = new Time(hour, minute, period);
+    }
+    static create(dateTimeObj){
+        let date = dateTimeObj.date;
+        let time = dateTimeObj.time;
+        return new DateTime(date.month, date.day, date.month, time.hour, time.minute, time.period)
     }
     toString(){
         return this.date.toString() + " " + this.time.toString();
@@ -104,10 +110,13 @@ export class DateTime{
 }
 
 export class Time{
-    constructor(timeObj){
-        this.minute = timeObj.minute;
-        this.hour = timeObj.hour;
-        this.period = timeObj.period;
+    constructor(hour, minute, period){
+        this.hour = hour;
+        this.minute = minute;
+        this.period = period;
+    }
+    static create(timeObj){
+        return new Time(timeObj.hour, timeObj.minute, timeObj.period);
     }
     toString(){
         if(this.minute < 10){
@@ -118,10 +127,13 @@ export class Time{
 }
 
 export class Date{
-    constructor(dateObj){
-        this.year = dateObj.year;
-        this.month = dateObj.month;
-        this.day = dateObj.day;
+    constructor(month, day, year){
+        this.month = month;
+        this.day = day;
+        this.year = year;
+    }
+    static create(dateObj){
+        return new Time(dateObj.month, dateObj.day, dateObj.year);
     }
     toString(){
         return this.month + "/" + this.day + "/" + this.year;
