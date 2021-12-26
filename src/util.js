@@ -23,6 +23,11 @@ export class Database {
             console.log(reply);
         })
     }
+
+    static insertTimeslot(timeslot){
+        let data = JSON.stringify(timeslot);
+        Database.request("add/timeslot", "POST", data);
+    }
 }
 
 export class General{
@@ -88,23 +93,23 @@ export class General{
     }
 }
 
-class DateTime{
+export class DateTime{
     constructor(timeObj){
         this.time = new Time(timeObj.time);
         this.date = new Date(timeObj.date);
     }
-    getString(){
-        return this.date.getString() + " " + this.time.getString();
+    toString(){
+        return this.date.toString() + " " + this.time.toString();
     }
 }
 
-class Time{
+export class Time{
     constructor(timeObj){
         this.minute = timeObj.minute;
         this.hour = timeObj.hour;
         this.period = timeObj.period;
     }
-    getString(){
+    toString(){
         if(this.minute < 10){
             return this.hour + ":0" + this.minute + " " + this.period;
         }
@@ -112,13 +117,23 @@ class Time{
     }
 }
 
-class Date{
+export class Date{
     constructor(dateObj){
         this.year = dateObj.year;
         this.month = dateObj.month;
         this.day = dateObj.day;
     }
-    getString(){
+    toString(){
         return this.month + "/" + this.day + "/" + this.year;
+    }
+}
+
+export class Timeslot{
+    constructor(title, repeated, start, end){
+        this.id = -1;
+        this.title = title;
+        this.repeated = repeated;
+        this.start = start;
+        this.end = end;
     }
 }
