@@ -89,5 +89,36 @@ export class General{
 }
 
 class DateTime{
-    constructor 
+    constructor(timeObj){
+        this.time = new Time(timeObj.time);
+        this.date = new Date(timeObj.date);
+    }
+    getString(){
+        return this.date.getString() + " " + this.time.getString();
+    }
+}
+
+class Time{
+    constructor(timeObj){
+        this.minute = timeObj.minute;
+        this.hour = timeObj.hour;
+        this.period = timeObj.period;
+    }
+    getString(){
+        if(this.minute < 10){
+            return this.hour + ":0" + this.minute + " " + this.period;
+        }
+        return this.hour + ":" + this.minute + " " + this.period;
+    }
+}
+
+class Date{
+    constructor(dateObj){
+        this.year = dateObj.year;
+        this.month = dateObj.month;
+        this.day = dateObj.day;
+    }
+    getString(){
+        return this.month + "/" + this.day + "/" + this.year;
+    }
 }

@@ -1,4 +1,4 @@
-import {General, Database} from "./util";
+import {General, Database, DateTime, Date, Time} from "./util";
 
 function init(){
     Database.getAllTimeSlots(displayTimeslots);
