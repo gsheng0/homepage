@@ -1,17 +1,24 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import {General, Database} from "./util";
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+function init(){
+    Database.getAllTimeSlots(displayTimeslots);
+}
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+
+function displayTimeslots(timeslots){
+    let rootElement = document.getElementById("root");
+    for(let i = 0; i < timeslots.length; i++){
+        let current = timeslots[i];
+        let text = "";
+        let title = current.title;
+        let id = current.id;
+        let repeated = current.repeated;
+        let start = current.start;
+        let end = current.end;
+        
+
+        let textElement = General.textElement("p", text);
+    }
+}
+
+init();
