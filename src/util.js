@@ -63,6 +63,13 @@ export class General{
         return parent;
     }
 
+    static createButton(text){
+        let parent = document.createElement("button");
+        let textElement = document.createTextNode(text);
+        parent.appendChild(textElement);
+        return parent;
+    }
+
     static clearElement(id){
         var div = document.getElementById(id);
         while(div.firstChild){
@@ -72,7 +79,6 @@ export class General{
 
     static containerElement(classList){
         let container = document.createElement("div");
-
         return container;
     }
 

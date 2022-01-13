@@ -6,6 +6,8 @@ function init(){
         new DateTime(12, 25, 2021, 7, 30, "PM"), 
         new DateTime(12, 26, 2021, 12, 0, "AM")));
 }
+
+
 function displaytasks(tasks){
     let rootElement = document.getElementById("root");
     for(let i = 0; i < tasks.length; i++){
@@ -14,7 +16,7 @@ function displaytasks(tasks){
 
         let title = current.title;
         let repeated = current.repeated;
-        let time = DateTime.create(current.date);
+        let date = DateTime.create(current.date);
 
         let titleLine = General.textElement("h5", title);
         let str = "no";
@@ -36,6 +38,15 @@ function displaytasks(tasks){
 
 function displayTimeslots(timeslots){
     let rootElement = document.getElementById("root");
+    let helloWorldButton = General.createButton("Hello World!");
+    helloWorldButton.onclick = function(){
+        document.getElementById("modal").style.display = "block";
+    }
+    let closeButton = document.getElementById("close");
+    closeButton.onclick = function(){
+        document.getElementById("modal").style.display = "none";
+    }
+    rootElement.appendChild(helloWorldButton);
     for(let i = 0; i < timeslots.length; i++){
         let container = General.containerElement([]);
         let current = timeslots[i];
@@ -62,6 +73,7 @@ function displayTimeslots(timeslots){
         container.appendChild(startTimeLine);
         container.appendChild(endTimeLine);
         rootElement.appendChild(container);
+    
     }
 }
 
