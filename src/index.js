@@ -6,7 +6,33 @@ function init(){
         new DateTime(12, 25, 2021, 7, 30, "PM"), 
         new DateTime(12, 26, 2021, 12, 0, "AM")));
 }
+function displaytasks(tasks){
+    let rootElement = document.getElementById("root");
+    for(let i = 0; i < tasks.length; i++){
+        let container = General.containerElement([]);
+        let current = tasks[i];
 
+        let title = current.title;
+        let repeated = current.repeated;
+        let time = DateTime.create(current.date);
+
+        let titleLine = General.textElement("h5", title);
+        let str = "no";
+        if(repeated === 1){
+            str = "yes";
+        }
+        let secondLine = General.textElement("p", "Repeated: " + str);
+        let dateLine = General.textElement("p", date.toString());
+        secondLine.style.paddingLeft = 40 + "px";
+        dateLine.style.paddingLeft = 40 + "px";
+
+        container.append(titleLine);
+        container.append(dateLine);
+        container.append(secondLine);
+        rootElement.append(container);
+
+    }
+}
 
 function displayTimeslots(timeslots){
     let rootElement = document.getElementById("root");
@@ -36,8 +62,6 @@ function displayTimeslots(timeslots){
         container.appendChild(startTimeLine);
         container.appendChild(endTimeLine);
         rootElement.appendChild(container);
-        
-
     }
 }
 

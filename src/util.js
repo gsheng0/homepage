@@ -24,10 +24,24 @@ export class Database {
         })
     }
 
+    static getAllTasks(updateFunction){
+        Database.request("get/task/all", "GET", {}, (e)=> {
+            let reply = JSON.parse(e.response);
+            updateFunction(reply);
+            console.log(reply);
+        })
+    }
+
     static insertTimeslot(timeslot){
         let data = JSON.stringify(timeslot);
         console.log(data);
         Database.request("add/timeslot", "POST", data);
+    }
+
+    static insertTask(task){
+        let data = JSON.stringify(task);
+        console.log(data);
+        Database.request("add/task", "POST", data);
     }
 }
 
